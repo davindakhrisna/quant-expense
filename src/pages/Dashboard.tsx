@@ -9,6 +9,7 @@ import { ExpenseList } from "@/components/ExpenseList";
 import { AddExpenseDialog } from "@/components/AddExpenseDialog";
 import { ExpenseSummary } from "@/components/ExpenseSummary";
 import { AuthGuard } from "@/components/AuthGuard";
+import { getCurrentMonth, getCurrentYear, getCurrentDate } from "@/utils/dateUtils";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -18,8 +19,8 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
 
-  const currentMonth = new Date().getMonth() + 1;
-  const currentYear = new Date().getFullYear();
+  const currentMonth = getCurrentMonth();
+  const currentYear = getCurrentYear();
 
   useEffect(() => {
     fetchData();
@@ -145,7 +146,7 @@ const Dashboard = () => {
           <div className="mt-8 max-w-6xl mx-auto border border-gray-300 rounded-xl py-4 px-8">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-xl font-semibold">
-                {new Date().toLocaleString("en-US", {
+                {getCurrentDate().toLocaleString("en-US", {
                   month: "long",
                   year: "numeric",
                 })}
